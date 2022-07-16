@@ -10,11 +10,18 @@ import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Swal from 'sweetalert2'
+import { useState, useEffect } from 'react';
+import { ModalEditNote } from './ModalEditNote';
 
 
 
 export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+      }
 
     const handleArchive = async (idNote) => {
         const response = await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/change-archived/${idNote}`, {
@@ -112,8 +119,9 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
                                     <ArchiveIcon />
                                 </Button>
                         }
-                        <Button size="small" color="success">
+                        <Button onClick={handleOpen} size="small" color="success">
                             <EditIcon />
+                            <ModalEditNote note={{idNote, title, content}} open={open} setOpen={setOpen}/>
                         </Button>
                     </CardActions>
                 </React.Fragment>
