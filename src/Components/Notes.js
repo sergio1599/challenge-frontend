@@ -11,34 +11,30 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-export const card = ({idNote, title, content, isArchived, }) => (
-    <React.Fragment>
-        <CardContent>
-            <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom>
-                Titulo Nota
-            </Typography>
-            <Typography variant="h6" component="div">
-            </Typography>
 
-            <Typography variant="body2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-        </CardContent>
-        <CardActions>
-            <ArchiveIcon/>
-            <DeleteIcon/>
-            <EditIcon/>
-        </CardActions>
-    </React.Fragment>
-);
-
-export const Notes = () => {
+export const Notes = ({ idNote, title, content, isArchived }) => {
     return (
         <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">{card}</Card>
-        </Box>,
-        <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">{card}</Card>
+            <Card variant="outlined" >
+                <React.Fragment>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom>
+                            {title}
+                        </Typography>
+                        <Typography variant="h6" component="div">
+                        </Typography>
+
+                        <Typography variant="body2">
+                            {content}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <ArchiveIcon />
+                        <DeleteIcon />
+                        <EditIcon />
+                    </CardActions>
+                </React.Fragment>
+            </Card>
         </Box>
     )
 }
