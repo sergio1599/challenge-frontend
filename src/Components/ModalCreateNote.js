@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Grid, Button } from '@mui/material'
 import { useForm } from '../hooks/useForm';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 
 
 const style = {
@@ -21,7 +21,7 @@ const style = {
     p: 4,
 };
 
-export const ModalCreateNote = ({ open, setOpen }) => {
+export const ModalCreateNote = ({ open, setOpen, setIsRefresh}) => {
 
 
     const handleClose = () => setOpen(false);
@@ -31,7 +31,6 @@ export const ModalCreateNote = ({ open, setOpen }) => {
         content: '',
     })
 
-
     const handleSubmit = async (e) => {
 
         const title = formNoteValues.title;
@@ -40,14 +39,9 @@ export const ModalCreateNote = ({ open, setOpen }) => {
         e.preventDefault();
 
         if (title === '' || content === '') {
-            swal({
-                title: "Ingrese todos los datos!",
-                text: "Ingrese los datos!",
-                icon: "error"
-            })
+
         } else {
-            console.log('si entra')
-             fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/create-note`, {
+            fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/create-note`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,13 +49,17 @@ export const ModalCreateNote = ({ open, setOpen }) => {
                 body: JSON.stringify({
                     title,
                     content
-                
+
+                })
+            });
+            Swal.fire({
+                title: "Muy bien!",
+                text: `la nota ${title} se ha agregado`,
+                icon: "success"
             })
-         }); 
-
+            setIsRefresh(true)
+            handleClose()
         }
-
-
     }
 
 
@@ -106,10 +104,14 @@ export const ModalCreateNote = ({ open, setOpen }) => {
                     </Grid>
                     <Grid container>
                         <Grid mr={2}>
-                            <Button variant="contained">Cancel</Button>
+                            <Button variant="contained" onClick={handleClose}>Cancel</Button>
                         </Grid>
                         <Grid>
-                            <Button onClick={handleSubmit} variant="contained">Save</Button>
+                            {
+                               formNoteValues.title || formNoteValues.content 
+                               ? <Button onClick={handleSubmit} variant="contained" >Save</Button>
+                               : <Button onClick={handleSubmit} variant="contained" disabled>Save</Button>
+                            }
                         </Grid>
 
                     </Grid>

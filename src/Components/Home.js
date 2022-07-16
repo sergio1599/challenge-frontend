@@ -13,9 +13,9 @@ export const Home = () => {
   const [notes, setNotes] = useState([]);
   const [isArchive, setIsArchive] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isRefresh, setIsRefresh] = useState(false);
 
   const handleOpen = () => {
-    /* console.log('handleNote'); */
     setOpen(true);
   }
 
@@ -27,6 +27,7 @@ export const Home = () => {
         .then(res => {
           const { success, data } = res;
           if (success) {
+            setIsRefresh(false);
             setNotes(data);
             setIsArchive(false);
           }
@@ -34,7 +35,7 @@ export const Home = () => {
     }
     getNotes();
 
-  }, [setIsArchive, setNotes])
+  }, [setIsArchive, setNotes, isRefresh])
 
   return (
     <>
@@ -45,7 +46,7 @@ export const Home = () => {
           </Grid>
           <Grid m={2} >
             <Button onClick={handleOpen} variant="contained" mx="auto" p={1} >Create Notes</Button>
-            <ModalCreateNote open={open} setOpen={setOpen} />
+            <ModalCreateNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh}/>
           </Grid>
           <Grid m={2}>
             <Button variant="contained">Archived Notes</Button>
@@ -55,11 +56,10 @@ export const Home = () => {
           {
             notes.map(note => (
               <Grid item xs={2} sm={4} md={4} >
-                <Notes key={note.idNote} {...note} />
+                <Notes key={note.idNote} {...note} setIsRefresh={setIsRefresh}/>
               </Grid>
             ))
           }
-
         </Grid>
       </Container>
 
