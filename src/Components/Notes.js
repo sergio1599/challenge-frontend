@@ -96,7 +96,6 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
                                     <ArchiveIcon />
                                 </Button>
                         }
-
                         <Button size="small" >
                             <EditIcon />
                         </Button>

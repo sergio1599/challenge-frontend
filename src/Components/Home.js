@@ -4,6 +4,7 @@ import { Grid, Button } from '@mui/material'
 import { Container, spacing } from '@mui/system'
 import { Notes } from './Notes'
 import {ModalCreateNote} from './ModalCreateNote'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -14,11 +15,14 @@ export const Home = () => {
   const [isArchive, setIsArchive] = useState(false);
   const [open, setOpen] = useState(false);
   const [isRefresh, setIsRefresh] = useState(false);
+  const navigate = useNavigate();
+  
 
   const handleOpen = () => {
     setOpen(true);
   }
 
+  const navigateToArchive = () => navigate('/archived'); 
 
   useEffect(() => {
     const getNotes = async () => {
@@ -49,7 +53,7 @@ export const Home = () => {
             <ModalCreateNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh}/>
           </Grid>
           <Grid m={2}>
-            <Button variant="contained">Archived Notes</Button>
+            <Button variant="contained" onClick={navigateToArchive}>Archived Notes</Button>
           </Grid>
         </Grid>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -62,7 +66,6 @@ export const Home = () => {
           }
         </Grid>
       </Container>
-
     </>
   )
 }
