@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ArchiveIcon from '@mui/icons-material/Archive';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Swal from 'sweetalert2'
@@ -28,6 +29,25 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
             Swal.fire(
                 'Archived',
                 'The note was filed successfully',
+                'success'
+            )
+            setIsRefresh(true);
+        }
+    };
+
+    const handleUnArchive = async (idNote) => {
+        const response = await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/change-unarchived/${idNote}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        const { success, message } = data;
+        if (success) {
+            Swal.fire(
+                'Unarchived',
+                'The note was successfully unarchived',
                 'success'
             )
             setIsRefresh(true);
@@ -62,16 +82,12 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
         })
     };
 
-
-
-
-
     return (
         <Box sx={{ minWidth: 275 }}>
             <Card variant="outlined" >
                 <React.Fragment>
                     <CardContent>
-                        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom>
+                        <Typography sx={{ fontSize: 32 }} color="text.primary" gutterBottom>
                             {title}
                         </Typography>
                         <Typography variant="h6" component="div">
@@ -82,21 +98,21 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" >
+                        <Button size="small" color="error">
                             <DeleteIcon onClick={() => handleDelete(idNote)} />
                         </Button>
                         {
                             isArchived
                                 ?
-                                <Button size="small" onClick={() => handleArchive(idNote)}>
-                                    <ArchiveIcon />
+                                <Button size="small" onClick={() => handleUnArchive(idNote)} >
+                                    <UnarchiveIcon />
                                 </Button>
                                 :
-                                <Button size="small" onClick={() => handleArchive(idNote)} disabled>
+                                <Button size="small" onClick={() => handleArchive(idNote)} >
                                     <ArchiveIcon />
                                 </Button>
                         }
-                        <Button size="small" >
+                        <Button size="small" color="success">
                             <EditIcon />
                         </Button>
                     </CardActions>

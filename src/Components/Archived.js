@@ -26,7 +26,7 @@ export const Archived = () => {
 
     useEffect(() => {
         const getNotes = async () => {
-            await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/`)
+            await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/data/archived`)
                 .then(response => response.json())
                 .then(res => {
                     const { success, data } = res;
@@ -48,11 +48,11 @@ export const Archived = () => {
                     <Grid m={2}>
                         <h1>Archived notes</h1>
                     </Grid>
-                    <Grid m={2} >
+                    <Grid mt={5} mr={2} >
                         <Button onClick={handleOpen} variant="contained" mx="auto" p={1} >Create Notes</Button>
                         <ModalCreateNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh} />
                     </Grid>
-                    <Grid m={2}>
+                    <Grid mt={5}>
                         <Button variant="contained" onClick={navigateUnArchive}>Unarchived Notes</Button>
                     </Grid>
                 </Grid>
