@@ -15,13 +15,10 @@ import { ModalEditNote } from './ModalEditNote';
 
 
 
-export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
+export const Notes = ({ idNote, title, content, isArchived, setIsRefresh, handleOpen}) => {
 
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
-      }
 
     const handleArchive = async (idNote) => {
         const response = await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/change-archived/${idNote}`, {
