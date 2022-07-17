@@ -23,7 +23,7 @@ const style = {
 };
 
 
-export const ModalEditNote = ({ open, setOpen, setIsRefresh, note}) => {
+export const ModalEditNote = ({ open, setOpen, setIsRefresh, note }) => {
 
     const handleClose = () => setOpen(false);
     console.log({note})

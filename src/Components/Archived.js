@@ -48,12 +48,9 @@ export const Archived = () => {
                     <Grid m={2}>
                         <h1>Archived notes</h1>
                     </Grid>
-                    <Grid mt={5} mr={2} >
-                        <Button onClick={handleOpen} variant="contained" mx="auto" p={1} >Create Notes</Button>
-                        <ModalCreateNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh} />
-                    </Grid>
+                    
                     <Grid mt={5}>
-                        <Button variant="contained" onClick={navigateUnArchive}>Unarchived Notes</Button>
+                        <Button variant="contained" onClick={navigateUnArchive} color="success">Unarchived Notes</Button>
                     </Grid>
                 </Grid>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>

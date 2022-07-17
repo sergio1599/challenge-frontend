@@ -60,7 +60,7 @@ export const Home = () => {
           {
             notes.map(note => (
               <Grid item xs={2} sm={4} md={4} >
-                <Notes key={note.idNote} {...note} setIsRefresh={setIsRefresh} handleOpen={handleOpen}/>
+                <Notes key={note.idNote} {...note} setIsRefresh={setIsRefresh} handleOpen={handleOpen} />
               </Grid>
             ))
           }

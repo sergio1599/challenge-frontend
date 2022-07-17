@@ -15,7 +15,7 @@ import { ModalEditNote } from './ModalEditNote';
 
 
 
-export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
+export const Notes = ({ idNote, title, content, isArchived, setIsRefresh}) => {
 
     const [open, setOpen] = useState(false);
 
