@@ -26,7 +26,7 @@ const style = {
 export const ModalEditNote = ({ open, setOpen, setIsRefresh, note}) => {
 
     const handleClose = () => setOpen(false);
-
+    console.log({note})
     const [formNoteValues, handleNoteInputChange] = useForm({
         title: note.title,
         content: note.content

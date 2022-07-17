@@ -15,10 +15,13 @@ import { ModalEditNote } from './ModalEditNote';
 
 
 
-export const Notes = ({ idNote, title, content, isArchived, setIsRefresh, handleOpen}) => {
+export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
 
     const [open, setOpen] = useState(false);
 
+    const handleOpen = () => {
+        setOpen(true);
+      }
 
     const handleArchive = async (idNote) => {
         const response = await fetch(`https://notes-api-ensolvers.herokuapp.com/api/notes/change-archived/${idNote}`, {
@@ -118,7 +121,7 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh, handle
                         }
                         <Button onClick={handleOpen} size="small" color="success">
                             <EditIcon />
-                            <ModalEditNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh} note={{idNote, title, content}} />
+                            <ModalEditNote  open={open} setOpen={setOpen} setIsRefresh={setIsRefresh} note={{idNote, title, content}} />
                         </Button>
                     </CardActions>
                 </React.Fragment>
