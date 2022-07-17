@@ -121,7 +121,7 @@ export const Notes = ({ idNote, title, content, isArchived, setIsRefresh }) => {
                         }
                         <Button onClick={handleOpen} size="small" color="success">
                             <EditIcon />
-                            <ModalEditNote note={{idNote, title, content}} open={open} setOpen={setOpen}/>
+                            <ModalEditNote open={open} setOpen={setOpen} setIsRefresh={setIsRefresh} note={{idNote, title, content}} />
                         </Button>
                     </CardActions>
                 </React.Fragment>
