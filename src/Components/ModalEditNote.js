@@ -54,7 +54,7 @@ export const ModalEditNote = ({ open, setOpen, setIsRefresh, note}) => {
             });
             Swal.fire({
                 title: "Muy bien!",
-                text: `la nota ${title} se ha agregado`,
+                text: `la nota ${title} se ha actualizado correctamente`,
                 icon: "success"
             })
             setIsRefresh(true)
